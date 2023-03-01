@@ -2,6 +2,7 @@ package com.jpcchaves.hrworker.resources;
 
 import com.jpcchaves.hrworker.entities.Worker;
 import com.jpcchaves.hrworker.repositories.WorkerRepository;
+import com.jpcchaves.hrworker.services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,25 +18,15 @@ import java.util.Optional;
 public class WorkerResource {
 
     @Autowired
-    private WorkerRepository repository;
+    private WorkerService service;
 
     @GetMapping
     public ResponseEntity<List<Worker>> findAll() {
-        List<Worker> workers = repository.findAll();
-        return ResponseEntity.ok(workers);
+        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Worker> findById(@PathVariable Long id) {
-        Optional<Worker> worker = repository.findById(id);
-
-        if(worker.isEmpty()) {
-            throw new RuntimeException("Worker not found");
-        }
-
-        return ResponseEntity.ok(worker.get());
+        return ResponseEntity.ok(service.findById(id));
     }
-
-
-
 }
