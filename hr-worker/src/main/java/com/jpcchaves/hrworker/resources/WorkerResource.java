@@ -1,5 +1,6 @@
 package com.jpcchaves.hrworker.resources;
 
+import com.jpcchaves.hrworker.dto.WorkerResponseDto;
 import com.jpcchaves.hrworker.entities.Worker;
 import com.jpcchaves.hrworker.repositories.WorkerRepository;
 import com.jpcchaves.hrworker.services.WorkerService;
@@ -21,12 +22,12 @@ public class WorkerResource {
     private WorkerService service;
 
     @GetMapping
-    public ResponseEntity<List<Worker>> findAll() {
+    public ResponseEntity<List<WorkerResponseDto>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Worker> findById(@PathVariable Long id) {
+    public ResponseEntity<WorkerResponseDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 }
