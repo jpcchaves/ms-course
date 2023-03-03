@@ -26,6 +26,7 @@ public class PaymentService {
 
         Worker worker = restTemplate.getForObject(workerHost + "/workers/{id}", Worker.class, uriVariables);
 
+        assert worker != null;
         return new Payment(worker.getName(), worker.getDailyIncome(), days);
     }
 }
